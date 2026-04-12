@@ -256,13 +256,12 @@ export default function Hero() {
                                 >
                                     <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
                                     <img
-                                        src="/src/assets/profile.jpg.png"
+                                        src="https://drive.google.com/uc?export=view&id=1wRRLJ_OoKBnuhlGrJx_FDVZOyopenqUc"
                                         alt="Ahmed Elgabbas"
                                         className="w-full h-full object-cover rounded-full"
                                         style={{ objectPosition: 'center top' }}
                                     />
                                 </div>
-
                                 {/* Fixed Icons on the outer border */}
                                 {orbitingIcons.map((item) => {
                                     const radius = 268;

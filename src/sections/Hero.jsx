@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Facebook, Twitter, Mail, Download, Code2, Star, Palette } from 'lucide-react';
+import profileImg from '../assets/hero-profile.jpg';
 import { useState, useEffect } from 'react';
 
 const TypewriterText = ({ words = ['React Developer', 'UI Designer', 'Problem Solver'] }) => {
@@ -256,7 +257,7 @@ export default function Hero() {
                                 >
                                     <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
                                     <img
-                                        src="https://drive.google.com/uc?export=view&id=1wRRLJ_OoKBnuhlGrJx_FDVZOyopenqUc"
+                                        src={profileImg}
                                         alt="Ahmed Elgabbas"
                                         className="w-full h-full object-cover rounded-full"
                                         style={{ objectPosition: 'center top' }}

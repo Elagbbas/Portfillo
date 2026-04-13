@@ -61,7 +61,7 @@ export default function Navbar() {
                 </a>
 
                 {/* Links */}
-                <nav className="hidden md:flex gap-12 text-sm font-medium">
+                <nav className="hidden md:flex gap-12 text-l font-medium">
                     {links.map((l) => {
                         const isActive = activeSection === l.toLowerCase();
                         return (

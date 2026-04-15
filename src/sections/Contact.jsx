@@ -1,6 +1,35 @@
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 export default function Contact() {
+    const [status, setStatus] = useState("");
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        setStatus("Sending...");
+
+        try {
+            const formData = new FormData(form);
+            const response = await fetch("https://formsubmit.co/ajax/ahmed.mahmoud.elgabbas@gmail.com", {
+                method: "POST",
+                body: formData
+            });
+
+            if (response.ok) {
+                setStatus("Your message has been sent! We'll get back to you soon.");
+                form.reset();
+                setTimeout(() => setStatus(""), 5000);
+            } else {
+                setStatus("Failed to send message. Please try again.");
+                setTimeout(() => setStatus(""), 5000);
+            }
+        } catch (error) {
+            setStatus("An error occurred. Please try again.");
+            setTimeout(() => setStatus(""), 5000);
+        }
+    };
+
     return (
         <>
             <style>{`
@@ -47,7 +76,7 @@ export default function Contact() {
                                         </svg>
                                     ),
                                     label: 'Email',
-                                    value: 'ahmedelgabbas769@gmail.com',
+                                    value: 'ahmed.mahmoud.elgabbas@gmail.com',
                                 },
                                 {
                                     icon: (
@@ -84,7 +113,8 @@ export default function Contact() {
                         </motion.div>
 
                         {/* Right - Form */}
-                        <motion.div
+                        <motion.form
+                            onSubmit={handleSubmit}
                             initial={{ opacity: 0, x: 20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
@@ -94,28 +124,46 @@ export default function Contact() {
 
                             <input
                                 type="text"
+                                name="name"
+                                required
                                 placeholder="Your Name"
                                 className="bg-[#1a2235] rounded-xl px-5 py-4 text-gray-400 placeholder-gray-600 outline-none w-full text-base"
                             />
                             <input
                                 type="email"
+                                name="email"
+                                required
                                 placeholder="Your Email"
                                 className="bg-[#1a2235] rounded-xl px-5 py-4 text-gray-400 placeholder-gray-600 outline-none w-full text-base"
                             />
                             <input
                                 type="text"
+                                name="_subject"
+                                required
                                 placeholder="Subject"
                                 className="bg-[#1a2235] rounded-xl px-5 py-4 text-gray-400 placeholder-gray-600 outline-none w-full text-base"
                             />
                             <textarea
+                                name="message"
+                                required
                                 placeholder="Your Message"
                                 rows={5}
                                 className="bg-[#1a2235] rounded-xl px-5 py-4 text-gray-400 placeholder-gray-600 outline-none w-full text-base resize-none"
                             />
-                            <button className="w-full bg-[#1a2235] border border-[#2a3a55] text-white font-bold text-lg py-4 rounded-xl hover:bg-[#1e2d45] hover:border-indigo-500 hover:shadow-[0_0_20px_rgba(99,102,241,0.25)] transition-all duration-300 flex items-center justify-center gap-2">
-                                Send Message ➤
+                            <button 
+                                type="submit"
+                                disabled={status === "Sending..."}
+                                className="w-full bg-[#1a2235] border border-[#2a3a55] text-white font-bold text-lg py-4 rounded-xl hover:bg-[#1e2d45] hover:border-indigo-500 hover:shadow-[0_0_20px_rgba(99,102,241,0.25)] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                {status === "Sending..." ? "Sending..." : "Send Message ➤"}
                             </button>
-                        </motion.div>
+
+                            {status && status !== "Sending..." && (
+                                <div className={`text-center font-medium mt-2 ${status.includes("sent") ? "text-green-400" : "text-red-400"}`}>
+                                    {status}
+                                </div>
+                            )}
+                        </motion.form>
 
                     </div>
                 </div>

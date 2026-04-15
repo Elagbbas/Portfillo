@@ -11,13 +11,16 @@ export default function Contact() {
 
         try {
             const formData = new FormData(form);
-            const response = await fetch("https://formsubmit.co/ajax/ahmed.mahmoud.elgabbas@gmail.com", {
+            const response = await fetch("https://formspree.io/f/xojyjlbb", {
                 method: "POST",
-                body: formData
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
             });
 
             if (response.ok) {
-                setStatus("Your message has been sent! We'll get back to you soon.");
+                setStatus("Your message has been sent! I'll get back to you soon.");
                 form.reset();
                 setTimeout(() => setStatus(""), 5000);
             } else {
@@ -127,6 +130,8 @@ export default function Contact() {
                                 name="name"
                                 required
                                 placeholder="Your Name"
+                                onInvalid={(e) => e.target.setCustomValidity('Please complete this required field.')}
+                                onInput={(e) => e.target.setCustomValidity('')}
                                 className="bg-[#1a2235] rounded-xl px-5 py-4 text-gray-400 placeholder-gray-600 outline-none w-full text-base"
                             />
                             <input
@@ -134,19 +139,25 @@ export default function Contact() {
                                 name="email"
                                 required
                                 placeholder="Your Email"
+                                onInvalid={(e) => e.target.setCustomValidity('Please complete this required field.')}
+                                onInput={(e) => e.target.setCustomValidity('')}
                                 className="bg-[#1a2235] rounded-xl px-5 py-4 text-gray-400 placeholder-gray-600 outline-none w-full text-base"
                             />
                             <input
                                 type="text"
-                                name="_subject"
+                                name="subject"
                                 required
                                 placeholder="Subject"
+                                onInvalid={(e) => e.target.setCustomValidity('Please complete this required field.')}
+                                onInput={(e) => e.target.setCustomValidity('')}
                                 className="bg-[#1a2235] rounded-xl px-5 py-4 text-gray-400 placeholder-gray-600 outline-none w-full text-base"
                             />
                             <textarea
                                 name="message"
                                 required
                                 placeholder="Your Message"
+                                onInvalid={(e) => e.target.setCustomValidity('Please complete this required field.')}
+                                onInput={(e) => e.target.setCustomValidity('')}
                                 rows={5}
                                 className="bg-[#1a2235] rounded-xl px-5 py-4 text-gray-400 placeholder-gray-600 outline-none w-full text-base resize-none"
                             />
